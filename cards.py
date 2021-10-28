@@ -34,9 +34,9 @@ class Deck:
 
 
 class Card:
-    def __init__(self, card_name="None", value=0):  # initialize card
-        self.name = card_name
-        self.value = value
+    def __init__(self, name="None"):  # initialize card
+        self.name = name
+        self.value = 0
 
         # assign value to card
         name_as_list = self.name.split(
@@ -55,9 +55,7 @@ class Card:
                 name_as_list[0])  # card does not have a face name, so you can convert name to a value using int()
 
     def print_up(self):  # function to print card face-up
-        name = self.name
-        name_as_list = name.split(
-            " of ")  # create new list using split function to get rid of the word 'of' so that you can seperate the card name and card suit
+        name_as_list = self.name.split(" of ")  # create new list using split function to get rid of the word 'of' so that you can seperate the card name and card suit
         card_num = name_as_list[0]
         card_suit = name_as_list[1]
         suits = ['♥', '♦', '♣', '♠']  # list of characters that will be used to represent the suit on the card
@@ -82,13 +80,14 @@ class Card:
         else:
             s = suits[1]
 
+        print(self.name)
         print(f'┌───────┐\n| {n:<2}    |\n|       |\n|   {s}   |\n|       |\n|    {n:>2} |\n└───────┘')
 
-    def print_down(self):  # function to print card face-down
-        card_name = self.name
-        print(card_name)
+    def print_down(self):  # function to print card face-down (ignore "Method 'print_down' may be 'static'")
+        # print(self.card_name) #test to make sure instance of card is being passed through, player should not know dealer's hidden card
         n = '?'
         s = '?'
+        print("\nUnknown card")
         print(f'┌───────┐\n| {n:<2}    |\n|       |\n|   {s}   |\n|       |\n|    {n:>2} |\n└───────┘')
 
 
