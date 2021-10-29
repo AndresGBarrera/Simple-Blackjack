@@ -9,11 +9,9 @@ import random
 class Deck:
     def __init__(self):  # create deck
         new_deck = []
-        card_name = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen',
-                     'King']  # create lists w/ possible card names and card suits
+        card_name = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']  # create lists w/ possible card names and card suits
         card_suit = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
-        for name in range(
-                len(card_name)):  # for loop to create deck that will be used for game using card_name list and card_suit list, store in game_deck list
+        for name in range(len(card_name)):  # for loop to create deck that will be used for game using card_name list and card_suit list, store in game_deck list
             for suit in range(len(card_suit)):
                 new_card = card_name[name] + ' of ' + card_suit[suit]
                 new_deck.append(new_card)
@@ -31,6 +29,7 @@ class Deck:
 
     def reset(self, dealer, player):  # function to reset deck and reset dealer and player's necessary attributes
         pass
+
 
 class Card:
     def __init__(self, name="None"):  # initialize card
@@ -50,8 +49,7 @@ class Card:
         elif card_num == 'King':
             self.value = 10
         else:
-            self.value = int(
-                name_as_list[0])  # card does not have a face name, so you can convert name to a value using int()
+            self.value = int(name_as_list[0])  # card does not have a face name, so you can convert name to a value using int()
 
     def print_up(self):  # function to print card face-up
         name_as_list = self.name.split(" of ")  # create new list using split function to get rid of the word 'of' so that you can seperate the card name and card suit
