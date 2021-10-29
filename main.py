@@ -15,12 +15,28 @@ if __name__ == "__main__":
 
     dealer = blackjack.Dealer()  # setup new dealer, deck, and game instances, print game rules and dealer intro
     deck = cards.Deck()
-    player.rules()
+    blackjack.rules()
+    player.info()
     dealer.intro()
 
     dealer.get_bet(player)  # use get_bet function to get bet, passing in player instance as argument| create instances of card using dealCard function from blackjack module as argument
     player.get_hand(deck)  # get_hand function to assign a new hand to player
     dealer.get_hand(deck)  # get_hand function to assign a new hand to dealer
+    while player.hand_value <= 21:
+        player_choice = input(f"{dealer.name}: \"Would you like to hit or stay?\"\nEnter 'h' to hit or 's' to stay >>>>>> ")
+        if player_choice.upper() == 'H' or player_choice.upper() == 'HIT':
+            print(f"{dealer.name}: You chose to hit.")
+            player.hit(deck)
+        elif player_choice.upper() == 'S' or player_choice.upper() == 'STAY':
+            print(f"{dealer.name}: You chose to stay")
+            player.stay(deck)
+            break
+        else:
+            print("\t----ERROR: Invalid option. Please enter 'h' or 's'----")
+    else:  # player busted
+        print(f"\n{dealer.name}: Oh no! Unfortunately you have busted and lost. Better luck next time!")
+        blackjack.bust_reset(deck, player, dealer)
+
     # print(player.dealt_cards, dealer.dealt_cards) #test
     # print(player.has_hand, dealer.has_hand) #test
 

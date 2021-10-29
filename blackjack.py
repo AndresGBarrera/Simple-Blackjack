@@ -15,48 +15,18 @@ class Player:
         self.hand_value = 0
         self.dealt_cards = []
 
-    def rules(self):  # function to print rules to user
-        print("\nThe concept of Blackjack is simple. Try to beat the dealer!")
-        print("")
-        print("Rules:")
-        print("\t1. Numbered cards are worth their number value (e.g. a 2 of Clubs is worth 2 points),face cards are worth 10 points, and in this game Aces are always worth 11!......")
-        print("\t2. After a bet has been placed, your cards will be dealt to you at random from the shuffled deck......")
-        print("\t3. If you are dealt a blackjack, you automatically win!......")
-        print("\t4. If dealer is dealt a blackjack, the game will result in an instant dealer win and you will forfeit your bet......")
-        print("\t5. After viewing your cards, you will decide to 'hit' for another card or take your chances and 'stay'......")
-        print("\t6. You may hit for as many cards as you can, but if you go over 21 you will 'bust' and lose the game......")
-        print(f"\nYou will start with $100. Good luck!")
-        self.info()
-
     def info(self):  # function used to return info about the player [name and current bank amount]
         print(f"\t----Player name: {self.name}\n\t----Current amount in bank: ${self.bank}")
 
-    def hit(self, deck, dealer): #function to allow player to stay or
-        while self.hand_value <= 21:
-            player_choice = input(
-                f"{dealer.name}: \"Would you like to hit or stay?\"\nEnter 'h' to hit or 's' to stay >>>>>> ")
-            if player_choice.upper() == 'H' or player_choice.upper() == 'HIT':
-                print("You chose to hit.")
-                card3 = cards.Card(deck.deal_card())
-                self.dealt_cards.append(card3.name)
-                print("Here is your next card:")
-                card3.print_up()
-                self.hand_value += card3.value
-                print(f"--Updated hand value is {self.hand_value}")
-            elif player_choice.upper() == 'S' or player_choice.upper() == 'STAY':
-                print("You chose to stay")
-                break
-            else:
-                print("\t----ERROR: Invalid option. Please enter 'h' or 's'----")
-        else:  # player busted
-            print(f"\n{dealer.name}: Oh no! Unfortunately you have busted and lost. Better luck next time!")
-            deck.reset()
-            self.has_hand = False
-            print(
-                f"\nYour bet of ${self.current_bet} has been forfeited. Your bank has been updated.\nHere is your updated info:")
-            self.bank -= self.current_bet
-            self.info()
-            self.current_bet = 0
+    def hit(self, deck):  # function to allow player to stay or
+        card = cards.Card(deck.deal_card())
+        self.dealt_cards.append(card.name)
+        card.print_up()
+        self.hand_value += card.value
+        print(f"--Updated hand value is {self.hand_value}")
+
+    def stay(self, deck):
+        pass
 
     def get_hand(self, deck):  # function to give player hand, keep giving cards until player stays or busts
         card1 = cards.Card(deck.deal_card())
@@ -75,6 +45,7 @@ class Player:
         else:
             self.has_hand = True
         print("....Dealer's turn to get cards....")
+
 
 
 class Dealer:
@@ -134,8 +105,31 @@ def intro():  # function to print intro to user
     print("\nWelcome to Simple Blackjack by Andres Barrera!")
 
 
-def end_hand(dealer, player, deck):  # TODO: possibly use this function to reset the deck and update player and dealer attributes
-    pass
+def rules():  # function to print rules to user
+    print("\nThe concept of Blackjack is simple. Try to beat the dealer!")
+    print("")
+    print("Rules:")
+    print("\t1. Numbered cards are worth their number value (e.g. a 2 of Clubs is worth 2 points),face cards are worth 10 points, and in this game Aces are always worth 11!......")
+    print("\t2. After a bet has been placed, your cards will be dealt to you at random from the shuffled deck......")
+    print("\t3. If you are dealt a blackjack, you automatically win!......")
+    print("\t4. If dealer is dealt a blackjack, the game will result in an instant dealer win and you will forfeit your bet......")
+    print("\t5. After viewing your cards, you will decide to 'hit' for another card or take your chances and 'stay'......")
+    print("\t6. You may hit for as many cards as you can, but if you go over 21 you will 'bust' and lose the game......")
+    print(f"\nYou will start with $100. Good luck!")
+
+
+def bust_reset(deck, player, dealer):
+    player.bank -= player.current_bet
+    player.has_hand = False  # reset player attributes
+    player.current_bet = 0
+    player.hand_value = 0
+    print(f"\nYour bet of ${player.current_bet} has been forfeited. Your bank has been updated.\nHere is your updated info:")
+    player.info()
+
+    dealer.has_hand = False  # reset dealer attributes
+    dealer.hand_value = 0
+
+
 
 
 
