@@ -4,6 +4,7 @@
 # -----------------------------------------------------
 import blackjack
 import cards
+import random
 
 # only run code below if this file is run as main file
 if __name__ == "__main__":
@@ -16,7 +17,9 @@ if __name__ == "__main__":
     user_name = input("\nTo get started, please enter your name: ")
     print(f"\n--------------------Welcome, {user_name}!--------------------")
     player = blackjack.Player(user_name)
-    dealer = blackjack.Dealer()  # setup new dealer, deck, and game instances, print game rules and dealer intro
+    names_list = ["John", "Kevin", "Bob", "Michael", "Karen", "Tiffany", "Sarah", "Victoria"]
+    dealer_name = random.choice(names_list)
+    dealer = blackjack.Dealer(dealer_name)  # setup new dealer, deck, and game instances, print game rules and dealer intro
     deck = cards.Deck()
     blackjack.rules(player)
     player.info()

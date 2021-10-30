@@ -51,8 +51,6 @@ class Player:
 class Dealer(Player):  # TODO: fix overwriting dealer name
     def ___init__(self, name, bank, has_hand, hand_value, dealt_cards):  # initializing dealer instance, random name from list
         super().__init__(name, bank, has_hand, hand_value, dealt_cards)
-        name_as_list = ["John", "Kevin", "Bob", "Michael", "Karen", "Tiffany", "Sarah", "Victoria"]
-        self.name = random.choice(name_as_list)
 
     def get_bet(self, player):
         while True:
