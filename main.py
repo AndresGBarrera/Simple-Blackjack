@@ -18,7 +18,7 @@ if __name__ == "__main__":
     player = blackjack.Player(user_name)
     dealer = blackjack.Dealer()  # setup new dealer, deck, and game instances, print game rules and dealer intro
     deck = cards.Deck()
-    blackjack.rules()
+    blackjack.rules(player)
     player.info()
 
     print("------------------------------------------------------------------------------------------------------------")
