@@ -2,21 +2,23 @@
 # Simple Blackjack game (cards.py file)
 # By Andres Barrera (agb0174)
 # -----------------------------------------------------
-
 import random
 
 
 class Deck:
-    def __init__(self):  # create deck
-        new_deck = []
-        card_name = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']  # create lists w/ possible card names and card suits
-        card_suit = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
-        for name in range(len(card_name)):  # for loop to create deck that will be used for game using card_name list and card_suit list, store in game_deck list
-            for suit in range(len(card_suit)):
-                new_card = card_name[name] + ' of ' + card_suit[suit]
-                new_deck.append(new_card)
-        random.shuffle(new_deck)
-        self.game_deck = new_deck
+    def __init__(self, game_deck=None):  # create deck
+        if game_deck is None:
+            new_deck = []
+            card_name = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+            card_suit = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
+            for name in range(len(card_name)):  # for loop to create deck that will be used for game
+                for suit in range(len(card_suit)):
+                    new_card = card_name[name] + ' of ' + card_suit[suit]
+                    new_deck.append(new_card)
+            random.shuffle(new_deck)
+            self.game_deck = new_deck
+        else:
+            self.game_deck = game_deck
 
     def check(self):  # function to print out deck list and length to make sure there are 52 unique cards
         print(self.game_deck)
@@ -37,8 +39,7 @@ class Card:
         self.value = 0
 
         # assign value to card
-        name_as_list = self.name.split(
-            ' of ')  # create new list using split function to get rid of the word 'of' so that you can seperate the card name and card suit
+        name_as_list = self.name.split(' of ')  # create new list separating the card name and suit
         card_num = name_as_list[0]
         if card_num == 'Ace':  # if/else statement to decide if card is face card or not, then assign value
             self.value = 11
@@ -48,15 +49,14 @@ class Card:
             self.value = 10
         elif card_num == 'King':
             self.value = 10
-        else:
-            self.value = int(name_as_list[0])  # card does not have a face name, so you can convert name to a value using int()
+        else:  # card does not have a face name, convert name to a value using int()
+            self.value = int(name_as_list[0])
 
     def print_up(self):  # function to print card face-up
-        name_as_list = self.name.split(" of ")  # create new list using split function to get rid of the word 'of' so that you can seperate the card name and card suit
+        name_as_list = self.name.split(" of ")  # create new list separating the card name and suit
         card_num = name_as_list[0]
         card_suit = name_as_list[1]
-        suits = ['♥', '♦', '♣', '♠']  # list of characters that will be used to represent the suit on the card
-
+        suits = ['♥', '♦', '♣', '♠']  # list of characters that will be used to represent the suit on the car
         if card_num == 'Ace':  # if/else statement to change card name to number
             n = 'A'
         elif card_num == 'Jack':
@@ -82,14 +82,11 @@ class Card:
 
     @staticmethod
     def print_down():  # function to print card face-down (ignore "Method 'print_down' may be 'static'")
-        # print(self.card_name) #test to make sure instance of card is being passed through, player should not know dealer's hidden card
+        # print(self.card_name) #test to make sure instance of card is being passed through
         n = '?'
         s = '?'
         print("\nUnknown card")
         print(f'┌───────┐\n| {n:<2}    |\n|       |\n|   {s}   |\n|       |\n|    {n:>2} |\n└───────┘')
 
 
-#-----------------------------------------------------------------------------------------------------------------------
-
-
-
+# -----------------------------------------------------------------------------------------------------------------------
