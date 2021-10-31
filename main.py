@@ -21,8 +21,9 @@ if __name__ == "__main__":
     dealer = blackjack.Dealer(random.choice(possible_names))  # setup new dealer, deck, and game instances
     deck = cards.Deck()
     game = blackjack.Game(deck, dealer, player)
-    game.rules()  # print game rules
+    blackjack.rules()  # print game rules
     game.first_run()
+    game.get_player_bet()
     game.start()
 
     # print(player.dealt_cards, dealer.dealt_cards) #test
