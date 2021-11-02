@@ -42,7 +42,7 @@ class Card:
         name_as_list = self.name.split(' of ')  # create new list separating the card name and suit
         card_num = name_as_list[0]
         if card_num == 'Ace':  # if/else statement to decide if card is face card or not, then assign value
-            self.value = 11
+            self.value = 11  # TODO: Figure out how to assign ace value of 1 or 11 depending on hand value
         elif card_num == 'Jack':
             self.value = 10
         elif card_num == 'Queen':
