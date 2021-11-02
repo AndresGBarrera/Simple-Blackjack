@@ -23,26 +23,37 @@ if __name__ == "__main__":
     game = blackjack.Game(deck, dealer, player)
     blackjack.rules()  # print game rules
     game.first_run()
-    game.get_player_bet()
-    game.new_hand()
-    game.decide_winner()
-
-    # first hand is over, ask user if they want to keep playing, if not exit
-    user_still_playing = True
-    while user_still_playing:  # TODO: Figure out how to break this loop. current way not working
-        user_still_playing = player.postgame()  # if method returns False, exits game
-
-        deck = cards.Deck()
-        game = blackjack.Game(deck, dealer, player)
-        game.reset(dealer, player)
+    while not game.over:
         game.get_player_bet()
         game.new_hand()
+    else:
         game.decide_winner()
         game.reset(dealer, player)
 
-    else:
-        print(f"Thank you for playing, {player.name}!")
+    # first hand is over, ask user if they want to keep playing, if not exit
+    done = False
+    while not done and player.bank > 0:
+        done = player.postgame()  # uses postgame method to assign value of True or False depending on user input
+        if done:  # if done is True, break loop, else continue
+            break
 
-    # print(player.dealt_cards, dealer.dealt_cards) #test
-    # print(player.has_hand, dealer.has_hand) #testr
+        # setup new deck and game instances, run through game again
+        deck = cards.Deck()
+        game = blackjack.Game(deck, dealer, player)
+        game.reset(dealer, player)
+        while not game.over:
+            game.get_player_bet()
+            game.new_hand()
+        else:
+            game.decide_winner()
+            game.reset(dealer, player)
+
+
+    if player.bank <= 0:
+        print("\nLooks like you lost all your money on the blackjack table! Tough luck!"
+              "\n\t****GAME OVER****")
+    else:
+        print(f"\nThank you for playing, {player.name}!")
+        print(f"You exited with ${player.bank}. Impressive!")
+
 
