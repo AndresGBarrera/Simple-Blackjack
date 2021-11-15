@@ -1,6 +1,6 @@
 # -----------------------------------------------------
 # Simple Blackjack game (cards.py file)
-# By Andres Barrera (agb0174)
+# By Andres Barrera (agb0174) and Rony Lopez
 # -----------------------------------------------------
 import random
 

@@ -1,17 +1,17 @@
 # -----------------------------------------------------
 # Simple Blackjack game (main.py file)
-# By Andres Barrera (agb0174)
+# By Andres Barrera (agb0174) and Rony Lopez
 # -----------------------------------------------------
 import blackjack
 import cards
 import random
 
-# only run code below if this file is run as main file
+
 if __name__ == "__main__":
     print("+---------------------------------------------------+\n|       "
           "Computer Science and Engineering            |"
           "\n|      CSCE 1035 - Computer Programming I           "
-          "|\n| Andres Barera agb0174 andresbarrera@my.unt.edu    |"
+          "|\n| Andres Barera and Rony Lopez   |"
           "\n+---------------------------------------------------+")
     print("\nWelcome to Simple Blackjack by Andres Barrera!")
     user_name = input("\nTo get started, please enter your name: ")
@@ -22,13 +22,13 @@ if __name__ == "__main__":
     deck = cards.Deck()
     game = blackjack.Game(deck, dealer, player)
     blackjack.rules()  # print game rules
+
+    # run first game
     game.first_run()
-    while not game.over:
-        game.get_player_bet()
-        game.new_hand()
-    else:
-        game.decide_winner()
-        game.reset(dealer, player)
+    game.get_player_bet()
+    game.new_hand()
+    game.decide_winner()
+    game.reset(dealer, player)
 
     # first hand is over, ask user if they want to keep playing, if not exit
     done = False
@@ -41,12 +41,11 @@ if __name__ == "__main__":
         deck = cards.Deck()
         game = blackjack.Game(deck, dealer, player)
         game.reset(dealer, player)
-        while not game.over:
-            game.get_player_bet()
-            game.new_hand()
-        else:
-            game.decide_winner()
-            game.reset(dealer, player)
+
+        game.get_player_bet()
+        game.new_hand()
+        game.decide_winner()
+        game.reset(dealer, player)
 
 
     if player.bank <= 0:
