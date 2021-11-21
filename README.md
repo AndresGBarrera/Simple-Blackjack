@@ -1,4 +1,6 @@
-# Simple-Blackjack
+# Simple-Blackjack game
+# Started: ~ Oct. 24, 2021
+# Completed: in progress
 A simple blackjack game I am creating for a class project.
 To whomever is reading this,
 Hello. This is a project I am working on for my Computer Programming I class @UNT. 
