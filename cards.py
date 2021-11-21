@@ -29,9 +29,6 @@ class Deck:
         self.game_deck.remove(card_choice)
         return card_choice
 
-    def reset(self, dealer, player):  # function to reset deck and reset dealer and player's necessary attributes
-        pass
-
 
 class Card:
     def __init__(self, name="None"):  # initialize card
@@ -81,7 +78,7 @@ class Card:
         print(f'┌───────┐\n| {n:<2}    |\n|       |\n|   {s}   |\n|       |\n|    {n:>2} |\n└───────┘')
 
     @staticmethod
-    def print_down():  # function to print card face-down (ignore "Method 'print_down' may be 'static'")
+    def print_down():  # function to print card face-down
         # print(self.card_name) #test to make sure instance of card is being passed through
         n = '?'
         s = '?'
