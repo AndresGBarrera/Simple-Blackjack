@@ -33,9 +33,8 @@ if __name__ == "__main__":
         game.decide_winner()
     game.reset(dealer, player)
 
-    # first hand is over, ask user if they want to keep playing, if not exit
-
-    done = False
+    # first hand is over, ask user if they want to keep playing, if not exit program
+    done = False  # boolean that represents if player is done playing
     while not done and player.bank > 0:  # while loop to keep playing hands until user is done, or runs out of money
         done = player.postgame()  # uses postgame method to assign value of True or False depending on user input
         if done:  # if done is True, break loop, else continue to play
@@ -58,5 +57,7 @@ if __name__ == "__main__":
     else:
         print(f"\nThank you for playing, {player.name}!")
         print(f"You exited with ${player.bank}. Impressive!")
+    print(f"******TOTAL AMOUNT WON TODAY******\n\t--${player.total_winnings}")
+    print(f"******TOTAL AMOUNT LOST TODAY******\n\t--${dealer.bank}")
 
 
